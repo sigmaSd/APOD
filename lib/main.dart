@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' show jsonDecode;
 import 'package:intl/intl.dart' show DateFormat;
-import 'dart:io' show Platform;
+import 'package:flutter/services.dart' show rootBundle;
 
 void main() => runApp(MyApp());
 
@@ -76,7 +76,7 @@ class _MyApp extends State<MyApp> {
       throw Exception;
     }
 
-    final apiKey = Platform.environment['NASA_API_KEY'];
+    final apiKey = await getApiKey();
     final authority = "api.nasa.gov";
     final path = "/planetary/apod";
 
@@ -252,6 +252,14 @@ List<Nasa> fromJsonVec(List<dynamic> json) {
   return nasavec;
 }
 
+// helper functions
+
 String formatDate(DateTime date) {
   return DateFormat("yyyy-MM-dd").format(date);
+}
+
+Future<String> getApiKey() async {
+  final jsonString = await rootBundle.loadString("assets/api_key.json");
+  final json = jsonDecode(jsonString);
+  return json['key'] as String;
 }
