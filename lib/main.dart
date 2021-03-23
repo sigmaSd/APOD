@@ -107,7 +107,7 @@ class _MyApp extends State<MyApp> {
         if (startDate != null) "start_date": "${formatDate(startDate)}",
         if (endDate != null) "end_date": "${formatDate(endDate)}"
       }));
-      print(response.body);
+
       if (response.statusCode == 200) {
         final json = jsonDecode(response.body);
         final len = json.length;
@@ -136,7 +136,7 @@ class _MyApp extends State<MyApp> {
         onPressed: () async {
           final dateRange = await showDateRangePicker(
               context: context,
-              firstDate: DateTime(1950),
+              firstDate: DateTime(1996),
               lastDate: DateTime.now());
           if (dateRange == null) {
             Navigator.pop(context);
@@ -216,7 +216,7 @@ class _MyApp extends State<MyApp> {
           final date = await showDatePicker(
             context: context,
             initialDate: DateTime.now(),
-            firstDate: DateTime(200),
+            firstDate: DateTime(1996),
             lastDate: DateTime.now(),
           );
           if (date != null) {
