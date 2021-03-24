@@ -13,6 +13,16 @@ RUN curl https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - &
     apt-get -y clean && \
     rm -rf /var/lib/apt/lists/*;
 
+# Install android studio
+RUN add-apt-repository ppa:maarten-fonville/android-studio && \
+    apt-get update && \
+    apt-get install android-sdk \
+        lib32stdc++6 \
+        android-studio \
+        android-sdk-build-tools \
+        android-sdk \
+        android-sdk-platform-23 --no-install-recommends --yes
+
 USER gitpod
 
 # Install Flutter sdk
@@ -28,13 +38,3 @@ ENV PUB_CACHE=/workspace/.pub_cache
 
 # add executables to PATH
 RUN echo 'export PATH=${FLUTTER_HOME}/bin:${FLUTTER_HOME}/bin/cache/dart-sdk/bin:${PUB_CACHE}/bin:${FLUTTER_HOME}/.pub-cache/bin:$PATH' >>~/.bashrc
-
-# Install android studio
-RUN add-apt-repository ppa:maarten-fonville/android-studio && \
-    apt-get update && \
-    apt-get install android-sdk \
-        lib32stdc++6 \
-        android-studio \
-        android-sdk-build-tools \
-        android-sdk \
-        android-sdk-platform-23 --no-install-recommends --yes
