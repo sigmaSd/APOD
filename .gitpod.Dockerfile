@@ -1,4 +1,4 @@
-FROM gitpod/workspace-full
+FROM gitpod/workspace-full-vnc
 
 ENV FLUTTER_HOME=/home/gitpod/flutter \
     FLUTTER_VERSION=v1.9.1+hotfix.6-stable
